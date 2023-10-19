@@ -21,5 +21,8 @@ public class ChangeRequestService {
         return changeRequestRepository.save(changeRequest);
     }
 
+    public ChangeRequest findRequest(Integer changeId){
+        return changeRequestRepository.findById(changeId).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
+    }
 
 }
