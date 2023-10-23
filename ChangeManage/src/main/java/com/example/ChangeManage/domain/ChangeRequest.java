@@ -35,6 +35,8 @@ public class ChangeRequest {
 
     private String riskAssessment;
 
+    private String status;
+
     //private List<String> otherDepartments; //This may have to converted to string before going to H2 but not sure
 
     @ManyToOne

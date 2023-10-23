@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,9 +32,21 @@ public class ChangeRequestService {
 
     public ChangeRequest findApp(Integer appId){
         return changeRequestRepository.findByApplicationId(appId);
-//        return changeRequestRepository.findAll();
     }
 
+   //There has to be a better way to do this function, but it works
+    public List<ChangeRequest> findUserRequests(Integer id){
+        CMUser user = cmUserRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
+        List<ChangeRequest> allRequest = changeRequestRepository.findAll();
+        List<ChangeRequest> userRequests = new ArrayList<>();
+        for (int i = 0; i < allRequest.size(); i++) {
+            if (allRequest.get(i).getUser() == user)
+                userRequests.add(allRequest.get(i));
+        }
+        return userRequests;
+    }
+
+    //Currently the only thing to update is the application status
     public ChangeRequest update(Integer changeId, ChangeRequest newRequest){
 
         System.out.println("changeId " + changeId);
@@ -41,10 +54,10 @@ public class ChangeRequestService {
         ChangeRequest changeRequestEntity = changeRequestRepository.findById(changeId)
                 .orElseThrow(()->new IllegalArgumentException("Invalid Id"));  //Persistence Context
 
-        changeRequestEntity.setApplicationId(newRequest.getApplicationId());
+        changeRequestEntity.setStatus(newRequest.getStatus());
         changeRequestRepository.save(changeRequestEntity); //Added this line of code
         return changeRequestEntity;
-    } //I am not sure if we will need to update change requests but if we do this is a working proof of concept
+    }
 
     public String delete(Integer changeId){
         changeRequestRepository.deleteById(changeId);

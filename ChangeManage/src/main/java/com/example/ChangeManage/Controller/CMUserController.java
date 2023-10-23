@@ -15,28 +15,18 @@ public class CMUserController {
     private final CMUserService cmUserService;
 
     @PostMapping("/user")
-
     public ResponseEntity<?> save(@RequestBody CMUser cmuser){
         return new ResponseEntity<>(cmUserService.create(cmuser), HttpStatus.CREATED);
     }
 
-
-
     @CrossOrigin
     @GetMapping("/user/{id}")
     public ResponseEntity<?> findAll(@PathVariable Integer id){
-
         return new ResponseEntity<>(cmUserService.findUser(id), HttpStatus.OK);
     }
 
-//    @CrossOrigin
-//    @GetMapping("/request/user/{id}")
-//    public ResponseEntity<?> findAll(){
-//        return new ResponseEntity<>(changeRequestService.findAll(), HttpStatus.OK);
-//    }
-
     @CrossOrigin
-    @PutMapping("/user/{id}")
+    @PatchMapping("/user/{id}")
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody CMUser cmUser){
         return new ResponseEntity<>(cmUserService.update(id, cmUser), HttpStatus.OK);
     }

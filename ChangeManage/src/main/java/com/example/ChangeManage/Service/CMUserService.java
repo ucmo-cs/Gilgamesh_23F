@@ -31,12 +31,20 @@ public class CMUserService {
                 .orElseThrow(()->new IllegalArgumentException("Invalid Id"));  //Persistence Context
 
         cmUserEntity.setAuthorizationLevel(user.getAuthorizationLevel());
+        cmUserEntity.setUserId(user.getUserId());
+        cmUserEntity.setPassword(user.getPassword());
+        cmUserRepository.save(cmUserEntity);
         return cmUserEntity;
-    } //I am not sure if we will need to update change requests but if we do this is a working proof of concept
+    }
 
     public String delete(Integer id){
         cmUserRepository.deleteById(id);
         return "ok";
     }
 
+    //Next step want to be able to verify login
+    //public Boolean verifyLogin(String userId, String password){
+    //  CMUser user = findByUserId(userId)
+    //  return password == user.getPassword();
+    //I am unsure for now how to implement the controller
 }

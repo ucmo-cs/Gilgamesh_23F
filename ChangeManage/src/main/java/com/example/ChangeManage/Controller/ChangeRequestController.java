@@ -29,6 +29,13 @@ public class ChangeRequestController {
     }
 
     @CrossOrigin
+    @GetMapping("/request/user/{id}")
+    public ResponseEntity<?> findByUser(@PathVariable Integer id){
+
+        return new ResponseEntity<>(changeRequestService.findUserRequests(id), HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @PatchMapping("/request/{changeId}")
     public ResponseEntity<?> update(@PathVariable Integer changeId, @RequestBody ChangeRequest changeRequest){
         return new ResponseEntity<>(changeRequestService.update(changeId, changeRequest), HttpStatus.OK);
@@ -39,4 +46,5 @@ public class ChangeRequestController {
         return new ResponseEntity<>(changeRequestService.delete(changeId), HttpStatus.OK);
     }
 
+    //Want to implement next the login verification
 }
