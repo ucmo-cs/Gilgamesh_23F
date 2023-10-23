@@ -6,6 +6,10 @@ import com.example.ChangeManage.domain.CMUser;
 import com.example.ChangeManage.domain.ChangeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
 
 @RequiredArgsConstructor
 @Service
@@ -25,4 +29,25 @@ public class ChangeRequestService {
         return changeRequestRepository.findById(changeId).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
     }
 
+    public ChangeRequest findApp(Integer appId){
+        return changeRequestRepository.findByApplicationId(appId);
+//        return changeRequestRepository.findAll();
+    }
+
+    public ChangeRequest update(Integer changeId, ChangeRequest newRequest){
+
+        System.out.println("changeId " + changeId);
+        System.out.println("newRequest " + newRequest.getApplicationId());
+        ChangeRequest changeRequestEntity = changeRequestRepository.findById(changeId)
+                .orElseThrow(()->new IllegalArgumentException("Invalid Id"));  //Persistence Context
+
+        changeRequestEntity.setApplicationId(newRequest.getApplicationId());
+        changeRequestRepository.save(changeRequestEntity); //Added this line of code
+        return changeRequestEntity;
+    } //I am not sure if we will need to update change requests but if we do this is a working proof of concept
+
+    public String delete(Integer changeId){
+        changeRequestRepository.deleteById(changeId);
+        return "ok";
+    }
 }

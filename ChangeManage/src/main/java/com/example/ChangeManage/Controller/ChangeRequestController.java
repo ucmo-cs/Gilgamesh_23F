@@ -28,5 +28,15 @@ public class ChangeRequestController {
         return new ResponseEntity<>(changeRequestService.findRequest(changeId), HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @PatchMapping("/request/{changeId}")
+    public ResponseEntity<?> update(@PathVariable Integer changeId, @RequestBody ChangeRequest changeRequest){
+        return new ResponseEntity<>(changeRequestService.update(changeId, changeRequest), HttpStatus.OK);
+    }
+    @CrossOrigin
+    @DeleteMapping("/request/{changeId}")
+    public ResponseEntity<?> deleteById(@PathVariable Integer changeId){
+        return new ResponseEntity<>(changeRequestService.delete(changeId), HttpStatus.OK);
+    }
 
 }
