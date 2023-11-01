@@ -30,9 +30,17 @@ public class CMUserController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody CMUser cmUser){
         return new ResponseEntity<>(cmUserService.update(id, cmUser), HttpStatus.OK);
     }
+
     @CrossOrigin
     @DeleteMapping("/user/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
         return new ResponseEntity<>(cmUserService.delete(id), HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @GetMapping("/user/login")
+    public ResponseEntity<?> login(@RequestBody CMUser cmUser){
+        return new ResponseEntity<>(cmUserService.verifyLogin(cmUser.getUserId(), cmUser.getPassword()), HttpStatus.OK);
+    }
+    //May change this function so it is not taking a user and instead a login object(yet to be created)
 }

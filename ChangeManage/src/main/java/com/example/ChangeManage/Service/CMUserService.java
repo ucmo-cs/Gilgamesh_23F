@@ -1,16 +1,20 @@
 package com.example.ChangeManage.Service;
 
 import com.example.ChangeManage.Repository.CMUserRepository;
+import com.example.ChangeManage.Repository.ChangeRequestRepository;
 import com.example.ChangeManage.domain.CMUser;
 import com.example.ChangeManage.domain.ChangeRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class CMUserService {
 
     private final CMUserRepository cmUserRepository;
+    private final ChangeRequestRepository changeRequestRepository;
 
     public CMUser create(CMUser user){
         return cmUserRepository.save(user);
@@ -38,13 +42,28 @@ public class CMUserService {
     }
 
     public String delete(Integer id){
+        CMUser user = findUser(id);
+        ChangeRequestService changeRequestService = new ChangeRequestService(cmUserRepository, changeRequestRepository);
+        List<ChangeRequest> list = changeRequestService.findUserRequests(user.getId());
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).setUser(null);
+            changeRequestRepository.save(list.get(i));
+        }
         cmUserRepository.deleteById(id);
         return "ok";
     }
+    //Function does not work if user owns a change request
+    //Function not tested, may work or error
 
     //Next step want to be able to verify login
-    //public Boolean verifyLogin(String userId, String password){
-    //  CMUser user = findByUserId(userId)
-    //  return password == user.getPassword();
-    //I am unsure for now how to implement the controller
+    public CMUser verifyLogin(String userId, String password) {
+        CMUser user = cmUserRepository.findByUserId(userId);
+        String usersPassword = user.getPassword();
+        if (usersPassword.equals(password))
+            return user;
+        else
+            return null;
+    }
+    //Working
+
 }
