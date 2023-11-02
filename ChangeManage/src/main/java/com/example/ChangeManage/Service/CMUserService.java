@@ -16,6 +16,10 @@ public class CMUserService {
     private final CMUserRepository cmUserRepository;
     private final ChangeRequestRepository changeRequestRepository;
 
+    //Added
+    public  static CMUser currentUser = null;
+
+
     public CMUser create(CMUser user){
         return cmUserRepository.save(user);
     }
@@ -52,18 +56,24 @@ public class CMUserService {
         cmUserRepository.deleteById(id);
         return "ok";
     }
-    //Function does not work if user owns a change request
-    //Function not tested, may work or error
 
-    //Next step want to be able to verify login
     public CMUser verifyLogin(String userId, String password) {
         CMUser user = cmUserRepository.findByUserId(userId);
         String usersPassword = user.getPassword();
-        if (usersPassword.equals(password))
+        if (usersPassword.equals(password)) {
+            currentUser = user;
+            ChangeRequestService.currentUser = user;
             return user;
+        }
         else
             return null;
     }
-    //Working
+
+    //logout function
+    public String logout(){
+        currentUser = null;
+        ChangeRequestService.currentUser = null;
+        return "ok";
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.ChangeManage.Service;
 
+import com.example.ChangeManage.ChangeManageApplication;
 import com.example.ChangeManage.Repository.CMUserRepository;
 import com.example.ChangeManage.Repository.ChangeRequestRepository;
 import com.example.ChangeManage.domain.CMUser;
@@ -18,11 +19,13 @@ public class ChangeRequestService {
 
     private final CMUserRepository cmUserRepository;
     private final ChangeRequestRepository changeRequestRepository;
+    public static CMUser currentUser = null;
 
     public ChangeRequest create(ChangeRequest changeRequest, String userId){
 
-        CMUser cmUser = cmUserRepository.findByUserId(userId);
-        changeRequest.setUser(cmUser);
+        //CMUser cmUser = cmUserRepository.findByUserId(userId);
+
+        changeRequest.setUser(currentUser);
         return changeRequestRepository.save(changeRequest);
     }
 

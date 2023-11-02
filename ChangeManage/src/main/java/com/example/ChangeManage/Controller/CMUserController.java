@@ -1,6 +1,7 @@
 package com.example.ChangeManage.Controller;
 
 import com.example.ChangeManage.Service.CMUserService;
+import com.example.ChangeManage.Service.ChangeRequestService;
 import com.example.ChangeManage.domain.CMUser;
 import com.example.ChangeManage.domain.ChangeRequest;
 import lombok.RequiredArgsConstructor;
@@ -43,4 +44,10 @@ public class CMUserController {
         return new ResponseEntity<>(cmUserService.verifyLogin(cmUser.getUserId(), cmUser.getPassword()), HttpStatus.OK);
     }
     //May change this function so it is not taking a user and instead a login object(yet to be created)
+
+    @CrossOrigin
+    @GetMapping("/user/logout")
+    public ResponseEntity<?> logout(){
+        return new ResponseEntity<>(cmUserService.logout(), HttpStatus.OK);
+    }
 }
