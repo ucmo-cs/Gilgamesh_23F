@@ -22,7 +22,7 @@ public class ChangeRequest {
     private String reason;
     private Integer reasonNumber; //ticket/service request, reason may need to become own class for the generated value
 
-    private String changeType;
+    private String changeType; //Do i need to set status on backend using current status or changeType?
     private String whyOccurring;
 
     private String startDate;
@@ -30,14 +30,16 @@ public class ChangeRequest {
     private String endDate;
     private String endTime;
 
-    private String backoutPlan; //May create backout plan as its own class
-    private String backoutMinutes;
+    private String backoutPlan;
+    private Integer backoutMinutes;
 
     private String riskAssessment;
 
-    private String status;
+    private Integer status; //Changed to Integer
+    //0 open, 1 frozen, 2 department approval, 3 application approval, 4 approved, 5 denied
 
-    //private List<String> otherDepartments; //This may have to converted to string before going to H2 but not sure
+    //private List<String> otherDepartments; //Not sure how i want to implement
+    //Do we want to add the ability to archive requests for the frontend (what happens after denial)
 
     @ManyToOne
     @JoinColumn(name = "id")

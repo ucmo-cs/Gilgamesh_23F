@@ -46,9 +46,9 @@ public class CMUserService {
     }
 
     public String delete(Integer id){
-        CMUser user = findUser(id);
-        ChangeRequestService changeRequestService = new ChangeRequestService(cmUserRepository, changeRequestRepository);
-        List<ChangeRequest> list = changeRequestService.findUserRequests(user.getId());
+        CMUser user = cmUserRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
+        ChangeRequestService changeRequestService = new ChangeRequestService(changeRequestRepository, cmUserRepository);
+        List<ChangeRequest> list = changeRequestService.findUserRequestsById(id); //needed the input
         for (int i = 0; i < list.size(); i++) {
             list.get(i).setUser(null);
             changeRequestRepository.save(list.get(i));
@@ -76,4 +76,38 @@ public class CMUserService {
         return "ok";
     }
 
+    /*
+    public String fillData() {
+        CMUser cmUser = new CMUser();
+        cmUser.setFirstName("John");
+        cmUser.setLastName("Doe");
+        cmUser.setUserId("user");
+        cmUser.setPassword("password");
+        cmUser.setAuthorizationLevel(0);
+        create(cmUser);
+
+        cmUser.setFirstName("Harry");
+        cmUser.setLastName("Jones");
+        cmUser.setUserId("dep");
+        cmUser.setPassword("password");
+        cmUser.setAuthorizationLevel(1);
+        create(cmUser);
+
+        cmUser.setFirstName("William");
+        cmUser.setLastName("England");
+        cmUser.setUserId("app");
+        cmUser.setPassword("password");
+        cmUser.setAuthorizationLevel(2);
+        create(cmUser);
+
+        cmUser.setFirstName("Garrett");
+        cmUser.setLastName("Abel");
+        cmUser.setUserId("ope");
+        cmUser.setPassword("password");
+        cmUser.setAuthorizationLevel(3);
+        create(cmUser);
+
+        return "ok";
+    }
+    */
 }

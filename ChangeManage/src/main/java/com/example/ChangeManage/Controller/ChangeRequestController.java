@@ -16,9 +16,7 @@ public class ChangeRequestController {
     @CrossOrigin
     @PostMapping("/request")
     public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest){
-
-        String userId = "testid"; //This will be removed later, I believe the variable will be supplied from the site
-        return new ResponseEntity<>(changeRequestService.create(changeRequest, userId), HttpStatus.CREATED);
+        return new ResponseEntity<>(changeRequestService.create(changeRequest), HttpStatus.CREATED);
     }
 
     @CrossOrigin
@@ -29,22 +27,53 @@ public class ChangeRequestController {
     }
 
     @CrossOrigin
-    @GetMapping("/request/user/{id}")
-    public ResponseEntity<?> findByUser(@PathVariable Integer id){
-
-        return new ResponseEntity<>(changeRequestService.findUserRequests(id), HttpStatus.OK);
+    @GetMapping("/request/userRequests")
+    public ResponseEntity<?> findByUser(){
+        return new ResponseEntity<>(changeRequestService.findUserRequests(), HttpStatus.OK);
     }
 
     @CrossOrigin
-    @PatchMapping("/request/{changeId}")
-    public ResponseEntity<?> update(@PathVariable Integer changeId, @RequestBody ChangeRequest changeRequest){
-        return new ResponseEntity<>(changeRequestService.update(changeId, changeRequest), HttpStatus.OK);
+    @GetMapping("/request/canApprove")
+    public ResponseEntity<?> canApprove(){
+        return new ResponseEntity<>(changeRequestService.findApprovable(), HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @GetMapping("/request/completed")
+    public ResponseEntity<?> findCompleted(){
+        return new ResponseEntity<>(changeRequestService.findCompleted(), HttpStatus.OK);
+    }
+
+    /*
+    @CrossOrigin
+    @PostMapping("/request/fill")
+    public ResponseEntity<?> fillData(){
+        return new ResponseEntity<>(changeRequestService.fillData(), HttpStatus.OK);
+    }
+     */
+
+    @CrossOrigin
+    @PatchMapping("/request/{changeId}")
+    public ResponseEntity<?> updateStatus(@PathVariable Integer changeId, @RequestBody ChangeRequest changeRequest){
+        return new ResponseEntity<>(changeRequestService.updateStatus(changeId, changeRequest), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PatchMapping("/request/approve/{changeId}")
+    public ResponseEntity<?> approve(@PathVariable Integer changeId){
+        return new ResponseEntity<>(changeRequestService.approve(changeId), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @PatchMapping("/request/deny/{changeId}")
+    public ResponseEntity<?> deny(@PathVariable Integer changeId){
+        return new ResponseEntity<>(changeRequestService.deny(changeId), HttpStatus.OK);
+    }
+
     @CrossOrigin
     @DeleteMapping("/request/{changeId}")
     public ResponseEntity<?> deleteById(@PathVariable Integer changeId){
         return new ResponseEntity<>(changeRequestService.delete(changeId), HttpStatus.OK);
     }
 
-    //Want to implement next the login verification
 }

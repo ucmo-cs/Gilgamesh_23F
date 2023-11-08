@@ -50,4 +50,13 @@ public class CMUserController {
     public ResponseEntity<?> logout(){
         return new ResponseEntity<>(cmUserService.logout(), HttpStatus.OK);
     }
+
+    /* want to use this to fill with base requests
+    @CrossOrigin
+    @PostMapping("/user/fill")
+    public ResponseEntity<?> fillDatabase(){
+        return new ResponseEntity<>(cmUserService.fillData(), HttpStatus.OK);
+    }
+    */
+
 }
