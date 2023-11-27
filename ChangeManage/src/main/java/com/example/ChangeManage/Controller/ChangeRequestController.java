@@ -22,7 +22,6 @@ public class ChangeRequestController {
     @CrossOrigin
     @GetMapping("/request/{changeId}")
     public ResponseEntity<?> findAll(@PathVariable Integer changeId){
-
         return new ResponseEntity<>(changeRequestService.findRequest(changeId), HttpStatus.OK);
     }
 
@@ -43,14 +42,6 @@ public class ChangeRequestController {
     public ResponseEntity<?> findCompleted(){
         return new ResponseEntity<>(changeRequestService.findCompleted(), HttpStatus.OK);
     }
-
-    /*
-    @CrossOrigin
-    @PostMapping("/request/fill")
-    public ResponseEntity<?> fillData(){
-        return new ResponseEntity<>(changeRequestService.fillData(), HttpStatus.OK);
-    }
-     */
 
     @CrossOrigin
     @PatchMapping("/request/{changeId}")

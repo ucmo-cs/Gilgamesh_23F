@@ -43,20 +43,11 @@ public class CMUserController {
     public ResponseEntity<?> login(@RequestBody CMUser cmUser){
         return new ResponseEntity<>(cmUserService.verifyLogin(cmUser.getUserId(), cmUser.getPassword()), HttpStatus.OK);
     }
-    //May change this function so it is not taking a user and instead a login object(yet to be created)
 
     @CrossOrigin
     @GetMapping("/user/logout")
     public ResponseEntity<?> logout(){
         return new ResponseEntity<>(cmUserService.logout(), HttpStatus.OK);
     }
-
-    /* want to use this to fill with base requests
-    @CrossOrigin
-    @PostMapping("/user/fill")
-    public ResponseEntity<?> fillDatabase(){
-        return new ResponseEntity<>(cmUserService.fillData(), HttpStatus.OK);
-    }
-    */
 
 }

@@ -16,98 +16,67 @@ public class CMUserService {
     private final CMUserRepository cmUserRepository;
     private final ChangeRequestRepository changeRequestRepository;
 
-    //Added
     public  static CMUser currentUser = null;
 
 
     public CMUser create(CMUser user){
-        return cmUserRepository.save(user);
+        try {
+            return cmUserRepository.save(user);
+        } catch (Exception ex) {throw ex;}
     }
-
-
 
     public CMUser findUser(Integer id){
-        return cmUserRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
+        try {
+            return cmUserRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        } catch (Exception ex) {throw ex;}
     }
 
-//    public List<ChangeRequest> findAll(){
-//        return changeRequestRepository.findAll();
-//    }
-
     public CMUser update(Integer id, CMUser user){
-        CMUser cmUserEntity = cmUserRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException("Invalid Id"));  //Persistence Context
-
-        cmUserEntity.setAuthorizationLevel(user.getAuthorizationLevel());
-        cmUserEntity.setUserId(user.getUserId());
-        cmUserEntity.setPassword(user.getPassword());
-        cmUserRepository.save(cmUserEntity);
-        return cmUserEntity;
+        try {
+            CMUser cmUserEntity = cmUserRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Id"));
+            cmUserEntity.setAuthorizationLevel(user.getAuthorizationLevel());
+            cmUserEntity.setUserId(user.getUserId());
+            cmUserEntity.setPassword(user.getPassword());
+            cmUserRepository.save(cmUserEntity);
+            return cmUserEntity;
+        } catch (Exception ex) {throw ex;}
     }
 
     public String delete(Integer id){
-        CMUser user = cmUserRepository.findById(id).orElseThrow(()->new IllegalArgumentException("Invalid ID"));
-        ChangeRequestService changeRequestService = new ChangeRequestService(changeRequestRepository, cmUserRepository);
-        List<ChangeRequest> list = changeRequestService.findUserRequestsById(id); //needed the input
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).setUser(null);
-            changeRequestRepository.save(list.get(i));
-        }
-        cmUserRepository.deleteById(id);
-        return "ok";
+        try {
+            CMUser user = cmUserRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+            ChangeRequestService changeRequestService = new ChangeRequestService(changeRequestRepository, cmUserRepository);
+            List<ChangeRequest> list = changeRequestService.findUserRequestsById(id); //needed the input
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setUser(null);
+                changeRequestRepository.save(list.get(i));
+            }
+            cmUserRepository.deleteById(id);
+            return "ok";
+        } catch (Exception ex) {return "Error occurred when deleting user";}
     }
 
     public CMUser verifyLogin(String userId, String password) {
-        CMUser user = cmUserRepository.findByUserId(userId);
-        String usersPassword = user.getPassword();
-        if (usersPassword.equals(password)) {
-            currentUser = user;
-            ChangeRequestService.currentUser = user;
-            return user;
-        }
-        else
-            return null;
+        try {
+            CMUser user = cmUserRepository.findByUserId(userId);
+            String usersPassword = user.getPassword();
+            if (usersPassword.equals(password)) {
+                currentUser = user;
+                ChangeRequestService.currentUser = user;
+                return user;
+            } else
+                throw new Exception("Invalid username or password");
+        } catch (Exception ex) {return null;}
     }
 
     //logout function
     public String logout(){
-        currentUser = null;
-        ChangeRequestService.currentUser = null;
-        return "ok";
+        try {
+            currentUser = null;
+            ChangeRequestService.currentUser = null;
+            return "logged out";
+        } catch (Exception ex) {return "Error logging out";}
     }
 
-    /*
-    public String fillData() {
-        CMUser cmUser = new CMUser();
-        cmUser.setFirstName("John");
-        cmUser.setLastName("Doe");
-        cmUser.setUserId("user");
-        cmUser.setPassword("password");
-        cmUser.setAuthorizationLevel(0);
-        create(cmUser);
-
-        cmUser.setFirstName("Harry");
-        cmUser.setLastName("Jones");
-        cmUser.setUserId("dep");
-        cmUser.setPassword("password");
-        cmUser.setAuthorizationLevel(1);
-        create(cmUser);
-
-        cmUser.setFirstName("William");
-        cmUser.setLastName("England");
-        cmUser.setUserId("app");
-        cmUser.setPassword("password");
-        cmUser.setAuthorizationLevel(2);
-        create(cmUser);
-
-        cmUser.setFirstName("Garrett");
-        cmUser.setLastName("Abel");
-        cmUser.setUserId("ope");
-        cmUser.setPassword("password");
-        cmUser.setAuthorizationLevel(3);
-        create(cmUser);
-
-        return "ok";
-    }
-    */
 }
