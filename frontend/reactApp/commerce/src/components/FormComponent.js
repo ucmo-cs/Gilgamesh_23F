@@ -23,8 +23,7 @@ function FormComponent() {
                     <Form.Label htmlFor="inputPassword5">Team</Form.Label>
                     <Form.Control
                         type="id"
-                        id="inputPassword5"
-                        aria-describedby="passwordHelpBlock"
+                        id='teamId'
                     />
                     <Form.Text id="passwordHelpBlock" muted>
                         Please enter the 3 letter identifer for the application team.
@@ -32,7 +31,6 @@ function FormComponent() {
                     </>
                     </Col>
                 </Row>
-                <Row>
                     <Form.Label>Brief Title</Form.Label>
                     <Form.Control 
                         type="title"
@@ -41,6 +39,15 @@ function FormComponent() {
                     <Form.Text>
                         50 character limit.
                     </Form.Text>
+                <Row>
+                    <Col>
+                        <Form.Label>Start Date & Time </Form.Label>
+                        <input type='datetime-local' id='startDateInput' defaultValue=''/>
+                    </Col>
+                    <Col>
+                        <Form.Label>End Date & Time </Form.Label>
+                        <input type='datetime-local' id='startDateInput' defaultValue=''/>
+                    </Col>
                 </Row>
             </Container>
       </Form>
