@@ -4,14 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import Login from './files/LoginPage/Login';
 import ChangesTableComponent from './components/ChangesTableComponent';
+import FormComponent from './components/FormComponent';
 
 
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <ChangesTableComponent />
+    <div className='App'>
+
+      <FormComponent />
+
+
     </div>
   );
 }
