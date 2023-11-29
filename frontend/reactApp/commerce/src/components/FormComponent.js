@@ -20,17 +20,26 @@ function FormComponent() {
             </Dropdown>
 
             <>
-            <Form.Label htmlFor="inputPassword5">Password</Form.Label>
-                <Form.Control
-                    type="password"
-                    id="inputPassword5"
-                    aria-describedby="passwordHelpBlock"
-                />
-                <Form.Text id="passwordHelpBlock" muted>
-                    Your password must be 8-20 characters long, contain letters and numbers,
-                    and must not contain spaces, special characters, or emoji.
-                </Form.Text>
+            <Form.Label htmlFor="inputPassword5">Team</Form.Label>
+            <Form.Control
+                type="id"
+                id="inputPassword5"
+                aria-describedby="passwordHelpBlock"
+            />
+            <Form.Text id="passwordHelpBlock" muted>
+                Please enter the 3 letter identifer for the application team.
+            </Form.Text>
             </>
+          </div>
+          <div>
+            <Form.Label>Brief Title</Form.Label>
+            <Form.Control 
+                type="title"
+                id='title'
+            />
+            <Form.Text>
+                50 character limit.
+            </Form.Text>
           </div>
       </Form>
     );
