@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 
 
  
-function CompletedChanges() {
+function CompletedChanges(props) {
 
     const [changerequests, setChangeRequests] = useState([
 
@@ -18,7 +18,7 @@ function CompletedChanges() {
     const getChangeReqeusts = async() =>{
     
         const response = await fetch(
-            "http://localhost:8080/request/userRequests"
+            "http://localhost:8080/request/completed"
         );
         const json = await response.json();
         setChangeRequests(json)
@@ -34,7 +34,9 @@ function CompletedChanges() {
     
     })
 
-
+    const ChangeDetails=(id)=>{
+      props.history.push('/Details/'+id)
+  }
 
 
     return (
@@ -45,21 +47,19 @@ function CompletedChanges() {
               <th>Change Number</th>
               <th>Change Description</th>
               <th>Approval Status</th>
-              <th>Change Date</th>
+              <th>Change Type</th>
               <th>Change Start Time</th>
-              <th>View Change Request</th>
             </tr>
           </thead>
           <tbody>
             {changerequests.map((changerequest)=>(
 
-                <tr>
+                <tr onClick={() => ChangeDetails(changerequest.changeId)}>
                 <td>{changerequest.changeId}</td>
                 <td>{changerequest.description}</td>
                 <td>{changerequest.status}</td>
-                <td>{changerequest.startTime}</td>
+                <td>{changerequest.changeType}</td>
                 <td>{changerequest.startDate}</td>
-                <td>{changerequest.changeId}</td>
                 </tr>
 
             ))}
