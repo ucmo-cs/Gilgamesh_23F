@@ -26,9 +26,9 @@ public class ChangeRequest {
     private String whyOccurring;
 
     private String startDate;
-    private String startTime;
+    //private String startTime;
     private String endDate;
-    private String endTime;
+    //private String endTime;
 
     private String backoutPlan;
     private String backoutMinutes;

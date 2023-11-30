@@ -22,6 +22,10 @@ public class ChangeRequestService {
     public ChangeRequest create(ChangeRequest changeRequest){
         //not sure if validation needs to be done here
         changeRequest.setUser(currentUser);
+        if (changeRequest.getChangeType().equals("Emergency"))
+            changeRequest.setStatus("Application");
+        else
+            changeRequest.setStatus("Frozen");
         return changeRequestRepository.save(changeRequest);
     } //Currently front end is in charge of setting status
 
@@ -66,7 +70,7 @@ public class ChangeRequestService {
     public List<ChangeRequest> findApprovable(){
         List<ChangeRequest> allRequest = changeRequestRepository.findAll();
         List<ChangeRequest> userRequests = new ArrayList<>();
-        if (currentUser.getAuthorizationLevel() == 3) { //Operations team
+        if (currentUser.getAuthorizationLevel().equals("Operations")) { //Operations team
             for (int i = 0; i < allRequest.size(); i++) {
                 if (allRequest.get(i).getUser().getId() != currentUser.getId())
                     userRequests.add(allRequest.get(i));
@@ -86,7 +90,7 @@ public class ChangeRequestService {
         List<ChangeRequest> allRequest = changeRequestRepository.findAll();
         List<ChangeRequest> userRequests = new ArrayList<>();
         for (int i = 0; i < allRequest.size(); i++) {
-            if (allRequest.get(i).getStatus() == "4")
+            if (allRequest.get(i).getStatus().equals("Approved"))
                 userRequests.add(allRequest.get(i));
         }
         return userRequests;
@@ -96,7 +100,14 @@ public class ChangeRequestService {
     public String approve(Integer changeId){
         ChangeRequest changeRequest =
                 changeRequestRepository.findById(changeId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
-        changeRequest.setStatus(changeRequest.getStatus() + 1);
+        if (changeRequest.getStatus().equals("Frozen"))
+            changeRequest.setStatus("Department");
+        else if (changeRequest.getStatus().equals("Department"))
+            changeRequest.setStatus("Application");
+        else if (changeRequest.getStatus().equals("Application"))
+            changeRequest.setStatus("Approved");
+        else
+            return "Error approving request";
         changeRequestRepository.save(changeRequest);
         return "Request Approved";
     }
@@ -105,7 +116,7 @@ public class ChangeRequestService {
     public String deny(Integer changeId){
         ChangeRequest changeRequest =
                 changeRequestRepository.findById(changeId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
-        changeRequest.setStatus("-1");
+        changeRequest.setStatus("Denied");
         changeRequestRepository.save(changeRequest);
         return "Request Denied";
     }
