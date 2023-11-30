@@ -17,10 +17,10 @@ public class ChangeRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer changeId;
-    private Integer applicationId;
+    private String applicationId;
     private String description;
     private String reason;
-    private Integer reasonNumber;
+    private String reasonNumber;
 
     private String changeType;
     private String whyOccurring;
@@ -31,11 +31,11 @@ public class ChangeRequest {
     private String endTime;
 
     private String backoutPlan;
-    private Integer backoutMinutes;
+    private String backoutMinutes;
 
     private String riskAssessment;
 
-    private Integer status; //Changed to Integer
+    private String status; //Changed to Integer
     //0 open, 1 frozen, 2 department approval, 3 application approval, 4 approved, -1 denied
 
     private String otherDepartments; //Just added

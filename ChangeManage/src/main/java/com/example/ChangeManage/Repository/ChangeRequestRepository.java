@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChangeRequestRepository extends JpaRepository<ChangeRequest, Integer> {
 
-    ChangeRequest findByApplicationId(Integer applicationId);
+    ChangeRequest findByApplicationId(String applicationId);
     ChangeRequest findByUser(CMUser cmUser);
 
 }

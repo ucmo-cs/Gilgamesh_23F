@@ -75,7 +75,7 @@ public class ChangeRequestService {
         }
         for (int i = 0; i < allRequest.size(); i++) {
             if (allRequest.get(i).getUser().getId() != currentUser.getId() &&
-                    currentUser.getAuthorizationLevel() == allRequest.get(i).getStatus())
+                    currentUser.getAuthorizationLevel().equals(allRequest.get(i).getStatus()))
                 userRequests.add(allRequest.get(i));
         }
         return userRequests;
@@ -86,7 +86,7 @@ public class ChangeRequestService {
         List<ChangeRequest> allRequest = changeRequestRepository.findAll();
         List<ChangeRequest> userRequests = new ArrayList<>();
         for (int i = 0; i < allRequest.size(); i++) {
-            if (allRequest.get(i).getStatus() == 4)
+            if (allRequest.get(i).getStatus() == "4")
                 userRequests.add(allRequest.get(i));
         }
         return userRequests;
@@ -105,7 +105,7 @@ public class ChangeRequestService {
     public String deny(Integer changeId){
         ChangeRequest changeRequest =
                 changeRequestRepository.findById(changeId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
-        changeRequest.setStatus(-1);
+        changeRequest.setStatus("-1");
         changeRequestRepository.save(changeRequest);
         return "Request Denied";
     }

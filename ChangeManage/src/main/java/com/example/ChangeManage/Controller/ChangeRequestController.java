@@ -17,6 +17,14 @@ public class ChangeRequestController {
     @CrossOrigin
     @PostMapping("/request")
     public ResponseEntity<?> save(@RequestBody ChangeRequest changeRequest){
+
+        System.out.println("Application ID " + changeRequest.getApplicationId());
+        System.out.println("Description " +changeRequest.getDescription());
+        System.out.println("Change type  " +changeRequest.getChangeType());
+        System.out.println("Start time " +changeRequest.getStartTime());
+        System.out.println("End time " +changeRequest.getEndTime());
+
+
         return new ResponseEntity<>(changeRequestService.create(changeRequest), HttpStatus.CREATED);
     }
 
