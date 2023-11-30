@@ -1,0 +1,9 @@
+.navbar {
+    size:auto;
+    width:100%;
+    background-color: green;
+    margin-left:auto;
+    margin-right: auto;
+    padding: 0%;
+    overflow: auto;
+}
