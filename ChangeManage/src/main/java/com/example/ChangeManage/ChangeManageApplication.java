@@ -11,3 +11,5 @@ public class ChangeManageApplication {
 	}
 
 }
+
+//change application.yml to create to delete saved database entries otherwise update
