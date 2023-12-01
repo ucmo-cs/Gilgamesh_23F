@@ -132,36 +132,37 @@ function CreateChangeRequest(props) {
                     <Form.Text>
                         80 character limit.
                     </Form.Text>
-                <Row>
 
-                </Row>
-                    <Form.Label>Reason</Form.Label>
-                    <Form.Select defaultValue='Pick a Reason'
+                
+                <Row>
+                  <Col>
+                      <Form.Label>Reason</Form.Label>
+                      <Form.Select defaultValue='Pick a Reason'
                             name = "reason"
                             onChange = {changeValue}
                         >
                             <option>Fix</option>
                             <option>Enhancement</option>
                         </Form.Select>
-
-                    <Form.Text>
-                        200 character limit. {reaminingCharactersReason} characters remaining.
-                    </Form.Text>
-                <Row>
+                  </Col>
 
 
                     <Col>
                         <Form.Label>Start Date & Time </Form.Label>
+                        <Row>
                         <input type='datetime-local' id='startDateInput' defaultValue=''                        
                          name = "startDate"
                          onChange = {changeValue}/>
+                         </Row>
                     </Col>
                     <Col>
+                        <Row>
                         <Form.Label>End Date & Time </Form.Label>
                         <input type='datetime-local' id='startDateInput' defaultValue=''
                             name = "endDate"
                             onChange = {changeValue}
                         />
+                        </Row>
                     </Col>
                 </Row>
 
