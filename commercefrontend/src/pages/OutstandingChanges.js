@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Header from '../components/Header'
+import ChangeApproval from './ChangeApproval';
 
 
  
@@ -55,7 +56,7 @@ function OutstandingChanges(props) {
           <tbody>
             {changerequests.map((changerequest)=>(
 
-                <tr onClick={() => ChangeDetails(changerequest.changeId)}>
+                <tr onClick={() => ChangeApproval(changerequest.changeId)}>
                 <td>{changerequest.changeId}</td>
                 <td>{changerequest.description}</td>
                 <td>{changerequest.status}</td>
