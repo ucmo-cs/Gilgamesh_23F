@@ -61,7 +61,8 @@ function UserLogin(props) {
       backgroundColor: '',
       margin: '50px auto',
       padding: '25px',
-      width: '400px'
+      width: '500px',
+      backgroundColor: '#f2f2f2'
     }
 
     const logoStyle = {
@@ -90,6 +91,11 @@ function UserLogin(props) {
       margin: '10px',
       fontSize: '20px'
     }
+
+    const textBoxWidth = {
+      width: '400px',
+      margin: 'auto'
+    }
   
   
     return (
@@ -103,6 +109,7 @@ function UserLogin(props) {
                 <Row>
                       <Form.Label style={biggerText}>Username</Form.Label>
                       <Form.Control 
+                          style={textBoxWidth}
                           type="text"
                           id= 'userId'
                           name = "userId"
@@ -113,6 +120,7 @@ function UserLogin(props) {
                   <Row>
                       <Form.Label style={biggerText}>Password</Form.Label>
                       <Form.Control 
+                          style={textBoxWidth}
                           type="title"
                           id='password'
                           name = "password"
