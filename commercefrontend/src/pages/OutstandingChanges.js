@@ -35,8 +35,8 @@ function OutstandingChanges(props) {
     
     })
 
-    const ChangeDetails=(id)=>{
-      props.history.push('/Details/'+id)
+    const ChangeApproval=(id)=>{
+      props.history.push('/Approval/'+id)
   }
 
 
