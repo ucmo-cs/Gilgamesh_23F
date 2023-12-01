@@ -11,6 +11,7 @@ import ChangeDetails from './pages/ChangeDetails';
 import { AuthProvider } from './components/AuthContext';
 import UserLogin from './pages/UserLogin';
 import ChangeApproval from './pages/ChangeApproval'
+import './components/Header.css'
 
 function App() {
   return (

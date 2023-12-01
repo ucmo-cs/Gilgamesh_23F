@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useAuth } from '../components/AuthContext';
 import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
-import Header from '../components/Header'
+import fullCBLogo from '../images/commerce-bank-full-logo.png';
 
 function UserLogin(props) {
   
@@ -53,16 +53,55 @@ function UserLogin(props) {
           
           });
       } 
-  
+
+
+    const loginDiv = {
+      border: '2px solid #006747',
+      borderRadius: '10px',
+      backgroundColor: '',
+      margin: '50px auto',
+      padding: '25px',
+      width: '400px'
+    }
+
+    const logoStyle = {
+      display: 'block',
+      margin: 'auto',
+      marginTop: '100px',
+      marginBottom: '40px'
+    }
+
+    const projectTitle = {
+      fontSize: '40px',
+      textAlign: 'center',
+      color: '#006747',
+    }
+
+    const loginButton = {
+      display: 'block',
+      margin: 'auto',
+      width: '100px',
+      height: '40px',
+      backgroundColor: '#006747',
+      color: 'white'
+    }
+
+    const biggerText = {
+      margin: '10px',
+      fontSize: '20px'
+    }
   
   
     return (
-      <div>
+      <>
+      <img src={fullCBLogo} style={logoStyle}></img>
+      <h1 style={projectTitle}>Change Management System</h1>
+      <div style={loginDiv}>
   
           <Form onSubmit={submitUserLogin}>
               <Container>
                 <Row>
-                      <Form.Label>Username</Form.Label>
+                      <Form.Label style={biggerText}>Username</Form.Label>
                       <Form.Control 
                           type="text"
                           id= 'userId'
@@ -72,7 +111,7 @@ function UserLogin(props) {
                   </Row>
   
                   <Row>
-                      <Form.Label>Password</Form.Label>
+                      <Form.Label style={biggerText}>Password</Form.Label>
                       <Form.Control 
                           type="title"
                           id='password'
@@ -84,7 +123,7 @@ function UserLogin(props) {
               </Container>
               <br></br>
   
-              <Button as="input" type="Submit" value="Submit" />
+              <Button as="input" type="Submit" value="Login" style={loginButton}/>
   
   
         </Form>
@@ -93,6 +132,7 @@ function UserLogin(props) {
   
   
       </div>
+      </>
     );
   }
   
