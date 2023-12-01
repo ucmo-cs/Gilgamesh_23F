@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
 import Header from '../components/Header'
  
-function ChangeDetails(props) {
+function ChangeApproval(props) {
 
 
     const[changerequest, setChangeRequest] = useState({
@@ -31,6 +31,14 @@ function ChangeDetails(props) {
         .then(res=>{
             setChangeRequest(res)});
       },[])
+
+      const approveChange = () =>{
+        fetch("http://localhost:8080/request/approve/" + id, {method:"PATCH"})
+      }
+
+      const denyChange = () => {
+        fetch("http://localhost:8080/request/deny/" + id, {method:"PATCH"})
+      }
 
 
   return (
@@ -180,11 +188,19 @@ function ChangeDetails(props) {
                   />
                 </Row>
             </Container>
-
+            <div>
+                <button type="button" onClick={approveChange}>
+                    Approve
+                </button>
+                
+                <button type="button" onClick={denyChange}>
+                    Deny
+                </button>
+            </div>
 
       </Form>
     </div>
   );
 }
 
-export default ChangeDetails;
+export default ChangeApproval;

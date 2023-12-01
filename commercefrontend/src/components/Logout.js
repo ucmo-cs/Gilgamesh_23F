@@ -10,7 +10,7 @@ function Logout() {
   const handleLogout = async () => {
     // Make a request to your backend to log the user out
     try {
-      await fetch('http://localhost:8080/logout', {
+      await fetch('http://localhost:8080/user/logout', {
         method: 'GET', // or the appropriate method for your backend
         credentials: 'include', // include cookies in the request
       });
