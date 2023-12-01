@@ -16,6 +16,7 @@ import ChangeDetails from './pages/ChangeDetails';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import { AuthProvider } from './components/AuthContext';
+import UserLogin from './pages/UserLogin';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Header/>
         <Container>
           <Route path="/" exact={true} component={Home}/>
-          <Route path="/login" exact={true} component={Login}/>
+          <Route path="/login" exact={true} component={UserLogin}/>
           <Route path="/create" exact={true} component={CreateChangeRequest}/>
           <Route path="/changerequest" exact={true} component={ChangeRequestList}/>
           <Route path="/book/:id" exact={true} component={Detail}/>

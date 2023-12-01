@@ -23,7 +23,7 @@ function App() {
       {isLoggedIn ? (
         <Logout />
       ) : (
-        <Link to="/login" className = "nav-link">Login</Link>
+        <Link to="/login" className = "nav-link">Logout</Link>
       )}
 
   

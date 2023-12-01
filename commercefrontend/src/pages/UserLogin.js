@@ -47,7 +47,7 @@ function UserLogin(props) {
               setUserLogin(res)
               props.history.push('/');
             }else{
-              alert('fails');
+              alert('Invalid Username or Password');
             }
           
           });
