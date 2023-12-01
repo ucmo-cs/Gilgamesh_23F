@@ -39,7 +39,7 @@ public class CMUserController {
     }
 
     @CrossOrigin
-    @GetMapping("/user/login")
+    @PostMapping("/user/login")
     public ResponseEntity<?> login(@RequestBody CMUser cmUser){
         return new ResponseEntity<>(cmUserService.verifyLogin(cmUser.getUserId(), cmUser.getPassword()), HttpStatus.OK);
     }
