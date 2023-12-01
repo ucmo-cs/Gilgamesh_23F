@@ -22,9 +22,8 @@ function App() {
   return (
     <AuthProvider>
       <div>
-        <Header/>
         <Container>
-          <Route path="/" exact={true} component={Home}/>
+          <Route path="/" exact={true} component={UserLogin}/>
           <Route path="/login" exact={true} component={UserLogin}/>
           <Route path="/create" exact={true} component={CreateChangeRequest}/>
           <Route path="/changerequest" exact={true} component={ChangeRequestList}/>

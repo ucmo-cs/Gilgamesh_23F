@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Header from '../components/Header'
  
 function ChangeDetails(props) {
 
@@ -33,6 +34,7 @@ function ChangeDetails(props) {
 
   return (
     <div>
+      <Header/>
            {changerequest.applicationId} <br/>
            {changerequest.description} <br/>
            {changerequest.startDate} <br/>

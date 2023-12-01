@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useAuth } from '../components/AuthContext';
 import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
+import Header from '../components/Header'
 
 function UserLogin(props) {
   
@@ -45,7 +46,7 @@ function UserLogin(props) {
             console.log(res)
             if(res!==null){
               setUserLogin(res)
-              props.history.push('/');
+              props.history.push('/changerequest');
             }else{
               alert('Invalid Username or Password');
             }

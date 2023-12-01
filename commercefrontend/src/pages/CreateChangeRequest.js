@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
+import Header from '../components/Header'
  
 function CreateChangeRequest(props) {
 
@@ -86,7 +87,7 @@ function CreateChangeRequest(props) {
 
   return (
     <div>
-
+        <Header/>
         <Form onSubmit={submitChangeRequest}>
             <Container>
                 <Row>
@@ -98,6 +99,7 @@ function CreateChangeRequest(props) {
                             name = "changeType"
                             onChange = {changeValue}
                         >
+                            <option>Select Change Type</option>
                             <option>Planned</option>
                             <option>Unplanned</option>
                             <option>Emergency</option>
@@ -141,6 +143,7 @@ function CreateChangeRequest(props) {
                             name = "reason"
                             onChange = {changeValue}
                         >
+                            <option>Pick a Reason</option>
                             <option>Fix</option>
                             <option>Enhancement</option>
                         </Form.Select>
@@ -181,7 +184,7 @@ function CreateChangeRequest(props) {
                     </Form.Text>
 
                 </Row>
-                  <Form.Label>Backout Plan - What it takes to revert the</Form.Label>
+                  <Form.Label>Backout Plan - What it takes to revert the change</Form.Label>
                     <Form.Control 
                         type="title"
                         id='backoutplan'
@@ -214,6 +217,7 @@ function CreateChangeRequest(props) {
                             name = "riskAssessment"
                             onChange = {changeValue}
                         >
+                            <option>Select Risk Assessment</option>
                             <option>Low</option>
                             <option>Medium</option>
                             <option>High</option>
