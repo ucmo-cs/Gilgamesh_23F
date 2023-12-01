@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
-
+import Header from '../components/Header'
 
 
  
@@ -41,6 +41,7 @@ function CompletedChanges(props) {
 
     return (
     <div>
+      <Header/>
         <Table striped bordered hover>
           <thead>
             <tr>

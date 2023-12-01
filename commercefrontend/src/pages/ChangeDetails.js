@@ -1,16 +1,24 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import Header from '../components/Header'
  
 function ChangeDetails(props) {
 
 
     const[changerequest, setChangeRequest] = useState({
         applicationId:'',
+        changeType:'',
         description:'',
-        startTime:'',
+        startDate:'',
         endDate:'',
-        changeType:''
+        reason:'',
+        whyOccurring:'',
+        backoutPlan:'',
+        backoutMinutes:'',
+        riskAssessment:'',
+        otherDepartments:'',
+        user:''
       });
     
       const id=props.match.params.id;
@@ -26,11 +34,20 @@ function ChangeDetails(props) {
 
   return (
     <div>
+      <Header/>
            {changerequest.applicationId} <br/>
            {changerequest.description} <br/>
-           {changerequest.startTime} <br/>
+           {changerequest.startDate} <br/>
            {changerequest.endDate} <br/> 
            {changerequest.changeType} <br/>
+           {changerequest.reason} <br/>
+           {changerequest.whyOccurring} <br/>
+           {changerequest.backoutPlan} <br/>
+           {changerequest.backoutMinutes} <br/> 
+           {changerequest.riskAssessment} <br/>
+           {changerequest.otherDepartments} <br/> 
+           {changerequest.user.firstName} <br/>
+           {changerequest.user.lastName} <br/>
     </div>
   );
 }

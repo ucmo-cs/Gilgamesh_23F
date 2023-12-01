@@ -1,19 +1,42 @@
 import React from 'react';
 import { useState } from 'react';
 import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
+import Header from '../components/Header'
  
 function CreateChangeRequest(props) {
 
-
+  const [reason, setReason] = useState('');
+  const [whyOccurring, setWhyOccurring] = useState('');
+  const [backoutPlan, setBackoutPlan] = useState('');
 
     const[changereqeust, setChangeRequests] = useState({
         applicationId:'',
         description:'',
-        startTime:'',
+        reason:'',
+        startDate:'',
         endDate:'',
-        changeType:''
+        changeType:'',
+        whyOccurring:'',
+        backoutPlan:'',
+        backoutMinutes:'',
+        riskAssessment: '',
       });
     
+
+      const reaminingCharactersReasonFunction=(e)=>{
+        setReason(e.target.value);
+        changeValue(e);
+      }
+
+      const reaminingCharactersWhyOccurringFunction=(e)=>{
+        setWhyOccurring(e.target.value);
+        changeValue(e);
+      }
+
+      const reaminingCharactersBackoutPlanFunction=(e)=>{
+        setBackoutPlan(e.target.value);
+        changeValue(e);
+      }
     
       const changeValue=(e)=>{
         console.log(e);
@@ -27,7 +50,10 @@ function CreateChangeRequest(props) {
 
         console.log(changereqeust);
       }
-
+      
+      const reaminingCharactersReason = 200 - reason.length;
+      const reaminingCharactersWhyOccurring = 200 - whyOccurring.length;
+      const reaminingCharactersBackoutPlan = 200 - backoutPlan.length;
 
       const submitChangeRequest =(e)=>{
         e.preventDefault();
@@ -61,7 +87,7 @@ function CreateChangeRequest(props) {
 
   return (
     <div>
-
+        <Header/>
         <Form onSubmit={submitChangeRequest}>
             <Container>
                 <Row>
@@ -73,6 +99,7 @@ function CreateChangeRequest(props) {
                             name = "changeType"
                             onChange = {changeValue}
                         >
+                            <option>Select Change Type</option>
                             <option>Planned</option>
                             <option>Unplanned</option>
                             <option>Emergency</option>
@@ -87,6 +114,7 @@ function CreateChangeRequest(props) {
                         id='teamId'
                         name = "applicationId"
                         onChange = {changeValue}
+                        maxLength = {3}
                     />
                     <Form.Text id="passwordHelpBlock" muted>
                         Please enter the 3 letter identifer for the application team.
@@ -94,46 +122,108 @@ function CreateChangeRequest(props) {
                     </>
                     </Col>
                 </Row>
-                    <Form.Label>Brief Title</Form.Label>
-                    <Form.Control 
-                        type="title"
-                        id='title'
-                        name = "title"
-                        onChange = {changeValue}
-                    />
-                    <Form.Text>
-                        50 character limit.
-                    </Form.Text>
-                <Row>
 
-                </Row>
                     <Form.Label>Description</Form.Label>
                     <Form.Control 
-                        type="title"
+                        type="text"
                         id='description'
                         name = "description"
                         onChange = {changeValue}
+                        maxLength={80}
                     />
-
                     <Form.Text>
-                        50 character limit.
+                        80 character limit.
                     </Form.Text>
+
+                
                 <Row>
+                  <Col>
+                      <Form.Label>Reason</Form.Label>
+                      <Form.Select defaultValue='Pick a Reason'
+                            name = "reason"
+                            onChange = {changeValue}
+                        >
+                            <option>Pick a Reason</option>
+                            <option>Fix</option>
+                            <option>Enhancement</option>
+                        </Form.Select>
+                  </Col>
 
 
                     <Col>
                         <Form.Label>Start Date & Time </Form.Label>
+                        <Row>
                         <input type='datetime-local' id='startDateInput' defaultValue=''                        
-                         name = "startTime"
+                         name = "startDate"
                          onChange = {changeValue}/>
+                         </Row>
                     </Col>
                     <Col>
+                        <Row>
                         <Form.Label>End Date & Time </Form.Label>
                         <input type='datetime-local' id='startDateInput' defaultValue=''
                             name = "endDate"
                             onChange = {changeValue}
                         />
+                        </Row>
                     </Col>
+                </Row>
+
+                <Row>
+                  <Form.Label>Explain why this Change is Occurring</Form.Label>
+                    <Form.Control 
+                        type="title"
+                        id='whyoccurring'
+                        name = "whyOccurring"
+                        onChange = {reaminingCharactersWhyOccurringFunction}
+                        maxLength = {200}
+                    />
+
+                    <Form.Text>
+                        200 character limit. {reaminingCharactersWhyOccurring} characters remaining.
+                    </Form.Text>
+
+                </Row>
+                  <Form.Label>Backout Plan - What it takes to revert the change</Form.Label>
+                    <Form.Control 
+                        type="title"
+                        id='backoutplan'
+                        name = "backoutPlan"
+                        onChange = {reaminingCharactersBackoutPlanFunction}
+                        maxLength = {200}
+                    />
+
+                    <Form.Text>
+                        200 character limit. {reaminingCharactersBackoutPlan} characters remaining.
+                    </Form.Text>
+                <Row>
+                    <Col>
+                    <>
+                    <Form.Label>Backout Minutes - How long it will take to revert the change</Form.Label>
+                    <Form.Control
+                        type="number"
+                        id='backoutminutes'
+                        name = "backoutMinutes"
+                        onChange = {changeValue}
+                    />
+                    </>
+                    </Col>
+
+                    <Col>
+                        <Form.Label>
+                            Risk Assessment
+                        </Form.Label>
+                        <Form.Select defaultValue='Select Risk Assessment'
+                            name = "riskAssessment"
+                            onChange = {changeValue}
+                        >
+                            <option>Select Risk Assessment</option>
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                        </Form.Select>
+                    </Col>
+
                 </Row>
             </Container>
             <br></br>
