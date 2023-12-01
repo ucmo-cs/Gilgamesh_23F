@@ -101,6 +101,7 @@ public class ChangeRequestService {
 
     //Approve and up status
     public String approve(Integer changeId){
+        System.out.println("approve attempt");
         ChangeRequest changeRequest =
                 changeRequestRepository.findById(changeId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
         if (changeRequest.getStatus().equals("Frozen"))
@@ -117,6 +118,7 @@ public class ChangeRequestService {
 
     //Deny and alter status
     public String deny(Integer changeId){
+        System.out.println("deny attempt");
         ChangeRequest changeRequest =
                 changeRequestRepository.findById(changeId).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
         changeRequest.setStatus("Denied");

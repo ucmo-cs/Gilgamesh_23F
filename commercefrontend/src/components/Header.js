@@ -41,7 +41,7 @@ function App() {
       <Link to ="/outstanding" className = "nav-link"><button style={navButtons} className='navButtons'>Outstanding Changes</button></Link>
       <Link to ="/completed" className = "nav-link"><button style={navButtons} className='navButtons'>Completed Changes</button></Link>
       <Link to ="/create" className = "nav-link"><button style={navButtons} className='navButtons'>Create Change Request</button></Link>
-      <Logout />
+      <Link to ="/login" className = "nav-link"><button style={navButtons} className='navButtons'>Logout</button></Link>
 
 
   
