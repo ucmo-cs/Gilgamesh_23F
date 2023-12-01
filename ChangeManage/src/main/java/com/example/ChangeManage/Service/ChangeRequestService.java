@@ -78,9 +78,12 @@ public class ChangeRequestService {
             return userRequests;
         }
         for (int i = 0; i < allRequest.size(); i++) {
-            if (allRequest.get(i).getUser().getId() != currentUser.getId() &&
-                    currentUser.getAuthorizationLevel().equals(allRequest.get(i).getStatus()))
-                userRequests.add(allRequest.get(i));
+            if (allRequest.get(i).getUser().getId() != currentUser.getId()) {
+                if (currentUser.getAuthorizationLevel().equals("Department") && allRequest.get(i).getStatus().equals("Frozen"))
+                    userRequests.add(allRequest.get(i));
+                if (currentUser.getAuthorizationLevel().equals("Applications") && allRequest.get(i).getStatus().equals("Department"))
+                    userRequests.add(allRequest.get(i));
+            }
         }
         return userRequests;
     }

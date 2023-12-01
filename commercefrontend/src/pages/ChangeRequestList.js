@@ -49,9 +49,8 @@ function ChangeRequestList(props) {
               <th>Change Number</th>
               <th>Change Description</th>
               <th>Approval Status</th>
-              <th>Change Date</th>
+              <th>Change Type</th>
               <th>Change Start Time</th>
-              <th>View Change Request</th>
             </tr>
           </thead>
           <tbody>
@@ -61,9 +60,8 @@ function ChangeRequestList(props) {
                 <td>{changerequest.changeId}</td>
                 <td>{changerequest.description}</td>
                 <td>{changerequest.status}</td>
-                <td>{changerequest.startTime}</td>
+                <td>{changerequest.changeType}</td>
                 <td>{changerequest.startDate}</td>
-                <td>{changerequest.changeId}</td>
                 </tr>
 
             ))}
