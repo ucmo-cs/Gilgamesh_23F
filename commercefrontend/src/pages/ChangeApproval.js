@@ -34,11 +34,19 @@ function ChangeApproval(props) {
 
       const approveChange = () =>{
         fetch("http://localhost:8080/request/approve/" + id, {method:"PATCH"})
+        .then(res=>{console.log(res)
+            if (res!==null) { props.history.push('/outstanding'); }
+            else {alert('fails')};
+        })
       }
 
       const denyChange = () => {
         fetch("http://localhost:8080/request/deny/" + id, {method:"PATCH"})
-      }
+        .then(res=>{console.log(res)
+            if (res!==null) { props.history.push('/outstanding'); }
+            else {alert('fails')};
+        })
+    }
 
 
   return (
