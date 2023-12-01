@@ -26,7 +26,6 @@ public class ChangeRequestService {
             changeRequest.setStatus("Application");
         else
             changeRequest.setStatus("Frozen");
-        changeRequest.setReasonNumber(changeRequest.getChangeId().toString());
         return changeRequestRepository.save(changeRequest);
     } //Currently front end is in charge of setting status
 
