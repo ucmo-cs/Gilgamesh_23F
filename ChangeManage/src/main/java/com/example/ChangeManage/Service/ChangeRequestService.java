@@ -26,6 +26,7 @@ public class ChangeRequestService {
             changeRequest.setStatus("Application");
         else
             changeRequest.setStatus("Frozen");
+        changeRequest.setReasonNumber(changeRequest.getChangeId().toString());
         return changeRequestRepository.save(changeRequest);
     } //Currently front end is in charge of setting status
 
@@ -72,7 +73,8 @@ public class ChangeRequestService {
         List<ChangeRequest> userRequests = new ArrayList<>();
         if (currentUser.getAuthorizationLevel().equals("Operations")) { //Operations team
             for (int i = 0; i < allRequest.size(); i++) {
-                if (allRequest.get(i).getUser().getId() != currentUser.getId())
+                if (allRequest.get(i).getUser().getId() != currentUser.getId() && !(allRequest.get(i).getStatus().equals("Approved")) &&
+                        !(allRequest.get(i).getStatus().equals("Denied")))
                     userRequests.add(allRequest.get(i));
             }
             return userRequests;
@@ -81,7 +83,7 @@ public class ChangeRequestService {
             if (allRequest.get(i).getUser().getId() != currentUser.getId()) {
                 if (currentUser.getAuthorizationLevel().equals("Department") && allRequest.get(i).getStatus().equals("Frozen"))
                     userRequests.add(allRequest.get(i));
-                if (currentUser.getAuthorizationLevel().equals("Applications") && allRequest.get(i).getStatus().equals("Department"))
+                if (currentUser.getAuthorizationLevel().equals("Application") && allRequest.get(i).getStatus().equals("Department"))
                     userRequests.add(allRequest.get(i));
             }
         }
