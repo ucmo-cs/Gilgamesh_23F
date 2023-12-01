@@ -34,6 +34,7 @@ const Login = () => {
       <input
         type="text"
         value={userId}
+        onChange={(e) => setUserId(e.target.value)}
         style={styles.input}
       />
       <br />

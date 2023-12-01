@@ -13,7 +13,7 @@ function App() {
 <>
   <Navbar bg="dark" variant="dark">
     <Container>
-    <h1 className = "navbar-brand">Change Management System</h1>
+    <Link to ="/"  className = "navbar-brand">Change Management System</Link>
 
     <Nav className="me-auto">
       <Link to ="/changerequest" className = "nav-link">My Changes</Link>

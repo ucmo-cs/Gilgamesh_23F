@@ -4,16 +4,26 @@ import { Form, Button, Dropdown, Container, Row, Col} from 'react-bootstrap';
  
 function CreateChangeRequest(props) {
 
-
+  const [reason, setReason] = useState('');
 
     const[changereqeust, setChangeRequests] = useState({
         applicationId:'',
         description:'',
-        startTime:'',
+        reason:'',
+        startDate:'',
         endDate:'',
-        changeType:''
+        changeType:'',
+        whyOccurring:'',
+        backoutPlan:'',
+        backoutMinutes:'',
+        riskAssessment: '',
       });
     
+
+      const reaminingCharacters=(e)=>{
+        setReason(e.target.value);
+        changeValue(e);
+      }
     
       const changeValue=(e)=>{
         console.log(e);
@@ -27,7 +37,8 @@ function CreateChangeRequest(props) {
 
         console.log(changereqeust);
       }
-
+      
+      const reaminingCharactersReason = 200 - reason.length;
 
       const submitChangeRequest =(e)=>{
         e.preventDefault();
@@ -96,13 +107,14 @@ function CreateChangeRequest(props) {
                 </Row>
                     <Form.Label>Brief Title</Form.Label>
                     <Form.Control 
-                        type="title"
-                        id='title'
-                        name = "title"
+                        type="text"
+                        id='description'
+                        name = "description"
                         onChange = {changeValue}
+                        maxLength={80}
                     />
                     <Form.Text>
-                        50 character limit.
+                        80 character limit.
                     </Form.Text>
                 <Row>
 
@@ -110,13 +122,13 @@ function CreateChangeRequest(props) {
                     <Form.Label>Description</Form.Label>
                     <Form.Control 
                         type="title"
-                        id='description'
-                        name = "description"
-                        onChange = {changeValue}
+                        id='reason'
+                        name = "reason"
+                        onChange = {reaminingCharacters}
                     />
 
                     <Form.Text>
-                        50 character limit.
+                        200 character limit. {reaminingCharactersReason} characters remaining.
                     </Form.Text>
                 <Row>
 
@@ -124,7 +136,7 @@ function CreateChangeRequest(props) {
                     <Col>
                         <Form.Label>Start Date & Time </Form.Label>
                         <input type='datetime-local' id='startDateInput' defaultValue=''                        
-                         name = "startTime"
+                         name = "startDate"
                          onChange = {changeValue}/>
                     </Col>
                     <Col>
