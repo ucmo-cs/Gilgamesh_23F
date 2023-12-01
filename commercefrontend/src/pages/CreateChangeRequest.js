@@ -20,6 +20,7 @@ function CreateChangeRequest(props) {
         backoutPlan:'',
         backoutMinutes:'',
         riskAssessment: '',
+        otherDepartments: ''
       });
     
 
@@ -224,6 +225,18 @@ function CreateChangeRequest(props) {
                         </Form.Select>
                     </Col>
 
+                </Row>
+
+                <Row>
+                  <Form.Label>
+                    Other Departments Needed
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    id='otherDepartments'
+                    name = "otherDepartments"
+                    onChange = {changeValue}
+                  />
                 </Row>
             </Container>
             <br></br>
